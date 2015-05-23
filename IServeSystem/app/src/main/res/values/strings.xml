@@ -1,6 +1,20 @@
 <resources>
-    <string name="app_name">IServeSystem</string>
+    <string name="app_name">iServe</string>
+
+    <string name="configuration_cat_dat">Cài Đặt</string>
+    <string name="configuration_cong_ket_noi">Cổng kết nối</string>
+    <string name="configuration_may_chu">Máy chủ</string>
+    <string name="configuration_thoi_gian_cho">Thời gian chờ</string>
+    <string name="configuration_tiep_tuc">Tiếp tục</string>
+
+    <string name="login_header">Đăng nhập</string>
+    <string name="login_name">Name:</string>
+    <string name="login_password">Password</string>
+    <string name="login_ok">Đồng ý</string>
+    <string name="login_cancel">Hủy</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_configuration">iServe</string>
+    <string name="title_activity_table">TableActivity</string>
 </resources>

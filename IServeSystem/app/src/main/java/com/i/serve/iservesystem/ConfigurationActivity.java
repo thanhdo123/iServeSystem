@@ -1,7 +1,6 @@
 package com.i.serve.iservesystem;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,28 +9,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Locale;
 
-public class LoginActivity extends Activity implements View.OnClickListener{
 
-    Button btnOK;
-    Button btnCancel;
+public class ConfigurationActivity extends Activity implements View.OnClickListener{
+
+    Button btnTiepTuc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-        btnOK = (Button)findViewById(R.id.btnLoginOK);
-        btnOK.setOnClickListener(this);
-
-        btnCancel = (Button)findViewById(R.id.btnLoginCancel);
-        btnCancel.setOnClickListener(this);
+        setContentView(R.layout.activity_configuration);
+        btnTiepTuc = (Button)findViewById(R.id.btnConfigTiepTuc);
+        btnTiepTuc.setOnClickListener(this);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_login, menu);
+        getMenuInflater().inflate(R.menu.menu_configuration, menu);
         return true;
     }
 
@@ -54,13 +50,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     public void onClick(View v) {
         Intent intent;
         switch (v.getId()) {
-            case R.id.btnLoginOK:
-                intent = new Intent(this, TableActivity.class);
+            case R.id.btnConfigTiepTuc:
+                intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
-                break;
-            case R.id.btnLoginCancel:
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(0);
                 break;
         }
     }
