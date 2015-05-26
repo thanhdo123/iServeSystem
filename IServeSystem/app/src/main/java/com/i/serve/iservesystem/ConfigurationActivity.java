@@ -53,6 +53,7 @@ public class ConfigurationActivity extends Activity implements View.OnClickListe
             case R.id.btnConfigTiepTuc:
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }
