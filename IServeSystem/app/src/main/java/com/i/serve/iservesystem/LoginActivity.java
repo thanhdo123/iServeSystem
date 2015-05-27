@@ -66,7 +66,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.btnLoginOK:
                 Log.d(TAG, "Press OK button");
-                Log.d(TAG, iServeApplicationl.writeAndWaitReply(inputUsername.getText().toString()));
+                //Log.d(TAG, iServeApplicationl.writeAndWaitReply(inputUsername.getText().toString()));
                 intent = new Intent(this, TableActivity.class);
                 startActivity(intent);
                 break;
