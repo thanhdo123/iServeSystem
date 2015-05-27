@@ -64,7 +64,8 @@ public class ConfigurationActivity extends Activity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnConfigTiepTuc:
                 IServeApplication iServeApplication = (IServeApplication) getApplicationContext();
-                iServeApplication.setupConnection(inputHost.getText().toString(), Integer.parseInt(inputPort.getText().toString()));
+                iServeApplication.setupConnection(inputHost.getText().toString(), Integer.parseInt(inputPort.getText().toString()),
+                        Integer.parseInt(inputTimeOut.getText().toString()));
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();

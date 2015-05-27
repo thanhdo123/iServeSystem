@@ -14,10 +14,10 @@ public class IServeApplication extends Application {
     private IConnectionManager iConnectionManager = null;
     private boolean isLoad = false;
 
-    public void setupConnection(String host, int port){
+    public void setupConnection(String host, int port, int timeOut){
         if(!isLoad) {
             try {
-                iConnectionManager = new ClientConnectionManager(host, port);
+                iConnectionManager = new ClientConnectionManager(host, port, timeOut);
                 iConnectionManager.setupSocket();
             } catch (IOException e) {
                 e.printStackTrace();

@@ -8,7 +8,9 @@ import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -24,18 +26,20 @@ public class ClientConnectionManager implements IConnectionManager {
     private String _host;
     private InetAddress _hostInetAddress;
     private int _port;
+    private int _timeOut;
     private ConnectionEstablisher _establishingThread;
     private int _delay;
     private Socket _socket;
     private Lock _writeLock;
     private volatile boolean _active;
 
-    public ClientConnectionManager( String host, int port ) {
+    public ClientConnectionManager( String host, int port, int timeOut ) {
         if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
         _host = host;
+        _timeOut = timeOut;
         _port = port;
         _delay = DEFAULT_DELAY;
         _active = false;
@@ -74,7 +78,10 @@ public class ClientConnectionManager implements IConnectionManager {
         public void run() {
             while ( !_shutdown && !Thread.currentThread().isInterrupted() ) {
                 try {
-                    _socket = new Socket( _hostInetAddress, _port );
+                    _socket = new Socket();
+                    // Connects this socket to the server with a specified timeout value
+                    // If timeout occurs, SocketTimeoutException is thrown
+                    _socket.connect(new InetSocketAddress(_hostInetAddress, _port), _timeOut);
                     Log.d(TAG, "Established connection: " + _host + ":" + _port);
                     _active = true;
                     break;
