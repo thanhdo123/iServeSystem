@@ -5,21 +5,31 @@ import android.app.Application;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+
+import com.i.serve.iservesystem.application.IServeApplication;
 
 
 public class LoginActivity extends Activity implements View.OnClickListener{
+    private static final String TAG = LoginActivity.class.getSimpleName();
 
-    Button btnOK;
-    Button btnCancel;
+    private Button btnOK;
+    private Button btnCancel;
+    private EditText inputUsername;
+    private IServeApplication iServeApplicationl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        iServeApplicationl = (IServeApplication) getApplicationContext();
+
+        inputUsername = (EditText)findViewById(R.id.txtUsername);
 
         btnOK = (Button)findViewById(R.id.btnLoginOK);
         btnOK.setOnClickListener(this);
@@ -55,6 +65,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         Intent intent;
         switch (v.getId()) {
             case R.id.btnLoginOK:
+                Log.d(TAG, "Press OK button");
+                Log.d(TAG, iServeApplicationl.writeAndWaitReply(inputUsername.getText().toString()));
                 intent = new Intent(this, TableActivity.class);
                 startActivity(intent);
                 break;

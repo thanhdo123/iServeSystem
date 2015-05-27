@@ -8,18 +8,30 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.i.serve.iservesystem.application.IServeApplication;
+import com.i.serve.iservesystem.socket.ClientConnectionManager;
+import com.i.serve.iservesystem.socket.IConnectionManager;
+
+import java.io.IOException;
 import java.util.Locale;
 
 
 public class ConfigurationActivity extends Activity implements View.OnClickListener{
 
-    Button btnTiepTuc;
+    private Button btnTiepTuc;
+    private EditText inputHost;
+    private EditText inputPort;
+    private EditText inputTimeOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuration);
+        inputHost = (EditText)findViewById(R.id.txtConfigMayChu);
+        inputPort = (EditText)findViewById(R.id.txtConfigCongKetNoi);
+        inputTimeOut = (EditText)findViewById(R.id.txtConfigThoiGianCho);
         btnTiepTuc = (Button)findViewById(R.id.btnConfigTiepTuc);
         btnTiepTuc.setOnClickListener(this);
     }
@@ -51,6 +63,8 @@ public class ConfigurationActivity extends Activity implements View.OnClickListe
         Intent intent;
         switch (v.getId()) {
             case R.id.btnConfigTiepTuc:
+                IServeApplication iServeApplication = (IServeApplication) getApplicationContext();
+                iServeApplication.setupConnection(inputHost.getText().toString(), Integer.parseInt(inputPort.getText().toString()));
                 intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
                 finish();
