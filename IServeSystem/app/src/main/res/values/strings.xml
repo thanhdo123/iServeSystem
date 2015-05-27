@@ -13,8 +13,12 @@
     <string name="login_ok">Đồng ý</string>
     <string name="login_cancel">Hủy</string>
 
+    <string name="menu_thucdon">Thực đơn</string>
+    <string name="menu_tonggiatien">Tổng giá tiền</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_configuration">iServe</string>
     <string name="title_activity_table">TableActivity</string>
+    <string name="title_activity_menu">MenuActivity</string>
 </resources>
