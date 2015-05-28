@@ -26,4 +26,9 @@
     <string name="status_2">Bàn trống</string>
     <string name="status_3">Bàn có sk</string>
     <string name="status_4">Bàn đợi món</string>
+
+    <string name="menu_thucdon_header">Thực đơn</string>
+    <string name="menu_tong_gia_tien">Tổng giá tiền</string>
+    <string name="menu_goi_mon">Gọi món</string>
+    <string name="title_activity_menu_confirm">MenuConfirmActivity</string>
 </resources>

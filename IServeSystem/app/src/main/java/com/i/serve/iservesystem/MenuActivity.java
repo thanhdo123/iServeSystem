@@ -1,17 +1,48 @@
 package com.i.serve.iservesystem;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
 
+import com.i.serve.iservesystem.service.MenuService;
 
-public class MenuActivity extends ActionBarActivity {
+import java.util.List;
+
+public class MenuActivity extends Activity implements View.OnClickListener {
+
+    ListView lsvMnuList;
+    Button btnMenuGoiMon;
+    List<com.i.serve.iservesystem.dto.MenuItem> mnuItems;
+    MenuListViewAdapter menuListViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        btnMenuGoiMon = (Button)findViewById(R.id.btnMenuGoiMon);
+        lsvMnuList = (ListView)findViewById(R.id.lsvMnuList);
+
+        btnMenuGoiMon.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mnuItems = MenuService.getMenuItems();
+
+        Log.d("mnuItems.size(): ", mnuItems.size() + "");
+
+        //Toast.makeText(this,  customers.size() + "", Toast.LENGTH_SHORT).show();
+        menuListViewAdapter = new MenuListViewAdapter(this, mnuItems);
+        menuListViewAdapter.setNotifyOnChange(true);
+        lsvMnuList.setAdapter(menuListViewAdapter);
     }
 
     @Override
@@ -34,5 +65,14 @@ public class MenuActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnMenuGoiMon:
+                Intent intent = new Intent(this, MenuConfirmActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }
