@@ -1,6 +1,7 @@
 package com.i.serve.iservesystem;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
@@ -32,6 +34,7 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
     private OrderListViewAdapter ordersAdapter;
     private OrderListViewAdapter waitingsAdapter;
     private Button btnOrder;
+    private TextView txtSoKhach;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,8 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         btnOrder = (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
 
+        txtSoKhach = (TextView)findViewById(R.id.txtSoKhach);
+
     }
 
     @Override
@@ -81,6 +86,34 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_table_detail, menu);
         return true;
+    }
+
+    public void performSelect(View view){
+        final Dialog d = new Dialog(TableDetailActivity.this);
+        d.setTitle(getResources().getString(R.string.title_sokhach));
+        d.setContentView(R.layout.number_picker_dialog);
+        Button b1 = (Button) d.findViewById(R.id.button1);
+        Button b2 = (Button) d.findViewById(R.id.button2);
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(50);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        b1.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                txtSoKhach.setText(String.valueOf(np.getValue()));
+                d.dismiss();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+        d.show();
     }
 
     @Override
