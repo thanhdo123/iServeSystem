@@ -19,4 +19,12 @@ public class MenuService {
         list.add(new MenuItem(6, "Chan gio rut xuong", "Chan gio heo, rut xuong, chien gion, an kem ra song", 200000));
         return list;
     }
+
+    public static List<MenuItem> getChosenMenuItems(){
+        List<MenuItem> list = new ArrayList<>();
+        list.add(new MenuItem(1, "Muc mot nang nuong", "Muc mong nang Phan Thiet, nuong moi, an kem muoi tieu chanh", 230000));
+        list.add(new MenuItem(2, "Bo nuong lu", "Bo tai chanh muoi tom", 13000));
+        list.add(new MenuItem(3, "Muc sua chien gion", "Muc chien gion an kem rau song", 150000));
+        return list;
+    }
 }

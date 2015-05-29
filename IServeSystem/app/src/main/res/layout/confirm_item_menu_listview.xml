@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:padding="10dp"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tvConfirmMnuName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="6"
+            android:gravity="left"
+            android:text="" />
+        <TextView
+            android:id="@+id/tvConfirmMnuPrice"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="" />
+        <EditText
+            android:id="@+id/etConfirmMnuItemQuantity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:numeric="integer"
+            android:editable="false"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+</LinearLayout>

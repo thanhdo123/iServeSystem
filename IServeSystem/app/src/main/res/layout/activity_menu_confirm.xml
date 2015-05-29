@@ -1,12 +1,107 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.i.serve.iservesystem.MenuConfirmActivity">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        tools:context="com.i.serve.iservesystem.MenuConfirmActivity">
 
-</RelativeLayout>
+        <TextView android:text="@string/menu_confirm_goimon"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="40px"
+            android:gravity="center"
+            android:background="#A4C639"
+            android:layout_height="80px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView android:text="@string/menu_confirm_ban"
+                android:layout_width="0dp"
+                android:gravity="left"
+                android:layout_weight="7"
+                android:layout_height="wrap_content" />
+
+            <TextView android:text="6"
+                android:layout_width="0dp"
+                android:gravity="right"
+                android:layout_weight="3"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <TextView android:text="@string/menu_confirm_xacnhangoidmon"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="40px"
+            android:gravity="center"
+            android:background="#89CFF0"
+            android:layout_height="55px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            <ListView
+                android:id="@+id/lsvConfirmMnuList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+
+        <TextView android:text=""
+            android:layout_width="match_parent"
+            android:layout_marginTop="20px"
+            android:layout_marginBottom="40px"
+            android:gravity="center"
+            android:background="#89CFF0"
+            android:layout_height="15px" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tvTongGiaTien"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:gravity="left"
+                android:text="@string/menu_confirm_tongiatien" />
+            <TextView
+                android:id="@+id/tvMnuPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:gravity="center"
+                android:text="1.325.000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal" >
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20px"
+                android:padding="30px"
+                android:text="@string/menu_confirm_xacnhan"
+                android:gravity="right"
+                android:id="@+id/btnConfirmMenuXacNhan"
+                android:layout_alignParentBottom="true"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
