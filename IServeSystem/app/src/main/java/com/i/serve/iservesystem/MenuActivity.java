@@ -2,7 +2,6 @@ package com.i.serve.iservesystem;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
 import com.i.serve.iservesystem.service.MenuService;
+import com.i.serve.iservesystem.uitls.Utils;
 
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         menuListViewAdapter = new MenuListViewAdapter(this, mnuItems);
         menuListViewAdapter.setNotifyOnChange(true);
         lsvMnuList.setAdapter(menuListViewAdapter);
+        Utils.setListViewHeightBasedOnChildren(lsvMnuList);
     }
 
     @Override

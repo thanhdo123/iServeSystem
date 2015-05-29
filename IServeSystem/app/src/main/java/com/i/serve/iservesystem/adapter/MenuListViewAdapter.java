@@ -1,4 +1,4 @@
-package com.i.serve.iservesystem;
+package com.i.serve.iservesystem.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.i.serve.iservesystem.R;
 import com.i.serve.iservesystem.dto.MenuItem;
 
 import java.util.ArrayList;

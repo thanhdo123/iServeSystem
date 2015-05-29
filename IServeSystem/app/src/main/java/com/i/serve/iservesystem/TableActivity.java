@@ -1,6 +1,7 @@
 package com.i.serve.iservesystem;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.support.v7.app.ActionBarActivity;
@@ -44,9 +45,9 @@ public class TableActivity extends Activity {
             wl.addView(button);
             button.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    Toast.makeText(view.getContext(),
-                            "Button clicked index = " + table.getTableId(), Toast.LENGTH_SHORT)
-                            .show();
+                Intent intent = new Intent(getBaseContext(), TableDetailActivity.class);
+                intent.putExtra("tableId", table.getTableId());
+                startActivity(intent);
                 }
             });
         }

@@ -31,11 +31,14 @@
         <activity
             android:name=".MenuActivity"
             android:label="@string/app_name" >
-
         </activity>
         <activity
             android:name=".MenuConfirmActivity"
             android:label="@string/title_activity_menu_confirm" >
+        </activity>
+        <activity
+            android:name=".TableDetailActivity"
+            android:label="@string/title_activity_table_detail" >
         </activity>
     </application>
 
