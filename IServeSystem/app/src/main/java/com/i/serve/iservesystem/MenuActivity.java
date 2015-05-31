@@ -1,14 +1,19 @@
 package com.i.serve.iservesystem;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
 import com.i.serve.iservesystem.service.MenuService;
@@ -22,13 +27,24 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     Button btnMenuGoiMon;
     List<com.i.serve.iservesystem.dto.MenuItem> mnuItems;
     MenuListViewAdapter menuListViewAdapter;
+    private int tableSelected = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            tableSelected = extras.getInt("tableId");
+        }
         btnMenuGoiMon = (Button)findViewById(R.id.btnMenuGoiMon);
         lsvMnuList = (ListView)findViewById(R.id.lsvMnuList);
+
+        lsvMnuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                performSelect(view);
+            }
+        });
 
         btnMenuGoiMon.setOnClickListener(this);
     }
@@ -73,8 +89,40 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.btnMenuGoiMon:
                 Intent intent = new Intent(this, MenuConfirmActivity.class);
+                intent.putExtra("tableId", tableSelected);
                 startActivity(intent);
                 break;
         }
+    }
+
+    public void performSelect(View view){
+        final MenuListViewAdapter.ItemMenuListView itemMenuListView = (MenuListViewAdapter.ItemMenuListView) view;
+        final Dialog d = new Dialog(MenuActivity.this);
+        d.setTitle(getResources().getString(R.string.title_sl));
+        d.setContentView(R.layout.number_picker_dialog);
+        Button b1 = (Button) d.findViewById(R.id.button1);
+        Button b2 = (Button) d.findViewById(R.id.button2);
+        final NumberPicker np = (NumberPicker) d.findViewById(R.id.numberPicker1);
+        np.setMaxValue(50);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (np.getValue() > 0) {
+                    itemMenuListView.etMnuItemQuantity.setText(String.valueOf(np.getValue()));
+                    itemMenuListView.etMnuItemQuantity.setTextColor(Color.RED);
+                    itemMenuListView.tvMnuName.setTextColor(Color.RED);
+                }
+                d.dismiss();
+            }
+        });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                d.dismiss();
+            }
+        });
+        d.show();
     }
 }

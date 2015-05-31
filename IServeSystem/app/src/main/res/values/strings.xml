@@ -35,7 +35,7 @@
 
     <string name="title_1">Hóa đơn hiên tại</string>
     <string name="title_phucvu">Các món đã phục vụ</string>
-    <string name="title_dangcho">Cấc món đang chờ</string>
+    <string name="title_dangcho">Các món đang chờ</string>
 
     <string name="title_order">Gọi món</string>
     <string name="title_bill">Thanh toán</string>
@@ -44,6 +44,9 @@
     <string name="title_fee">Phí phục vụ</string>
     <string name="title_bill_total">Tổng hóa đơn</string>
     <string name="title_sokhach">Số khách</string>
+    <string name="title_sl">Số lượng</string>
+    <string name="btn_chon">Chọn</string>
+    <string name="btn_huy">Hủy</string>
 
     <string name="menu_confirm_goimon">Gọi món</string>
     <string name="menu_confirm_ban">Bàn</string>

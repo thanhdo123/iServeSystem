@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.i.serve.iservesystem.R;
 import com.i.serve.iservesystem.dto.MenuItem;
 import com.i.serve.iservesystem.dto.TableDetailItem;
+import com.i.serve.iservesystem.uitls.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,7 @@ public class OrderListViewAdapter extends ArrayAdapter<TableDetailItem> {
             TextView txtQuantity = ((ItemOrderListView) view).txtQuantity;
 
             txtFoodName.setText(c.getFoodName());
-            txtFoodPrice.setText(String.valueOf(c.getPrice()));
+            txtFoodPrice.setText(Utils.formatPrice(c.getPrice()));
             txtQuantity.setText(String.valueOf(c.getQuantity()));
 
         }

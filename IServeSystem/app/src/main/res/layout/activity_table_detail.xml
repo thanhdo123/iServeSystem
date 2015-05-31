@@ -45,7 +45,6 @@
                 android:text="0"
                 android:background="#00BFFF"
                 android:id="@+id/txtSoKhach"
-                android:onClick="performSelect"
                 />
         </RelativeLayout>
 

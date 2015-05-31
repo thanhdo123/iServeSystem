@@ -35,20 +35,22 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
     private OrderListViewAdapter waitingsAdapter;
     private Button btnOrder;
     private TextView txtSoKhach;
+    private TextView lblPhucvu;
+    private TextView lblDangcho;
+    private int tableSelected = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_table_detail);
         Bundle extras = getIntent().getExtras();
-        int value = -1;
         if (extras != null) {
-            value = extras.getInt("tableId");
+            tableSelected = extras.getInt("tableId");
         }
         List<TableDetailItem> orders = new ArrayList<>();
         List<TableDetailItem> waitings = new ArrayList<>();
         //get order details by table id
-        List<TableDetailItem> foods= TableDetailService.getTableDetailById(value);
+        List<TableDetailItem> foods= TableDetailService.getTableDetailById(tableSelected);
         for (TableDetailItem item : foods){
             if(item.getStatus() == 1){
                 orders.add(item);
@@ -59,7 +61,7 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         }
 
         TextView lblHeader = (TextView) this.findViewById(R.id.lblHeader);
-        lblHeader.setText(getResources().getString(R.string.table) + " " + value);
+        lblHeader.setText(getResources().getString(R.string.table) + " " + tableSelected);
 
         lsvOrderList = (ListView)findViewById(R.id.lsvOrderList);
         lsvWaitingList = (ListView)findViewById(R.id.lsvWaitingList);
@@ -78,6 +80,13 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         btnOrder.setOnClickListener(this);
 
         txtSoKhach = (TextView)findViewById(R.id.txtSoKhach);
+
+        //count food
+        lblPhucvu = (TextView)findViewById(R.id.lblPhucvu);
+        lblDangcho = (TextView)findViewById(R.id.lblDangcho);
+
+        lblPhucvu.setText(getResources().getString(R.string.title_phucvu) + " (" + orders.size() + ")");
+        lblDangcho.setText(getResources().getString(R.string.title_dangcho) + " (" + waitings.size() + ")");
 
     }
 
@@ -136,6 +145,7 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.btnOrder:
                 intent = new Intent(this, MenuActivity.class);
+                intent.putExtra("tableId", tableSelected);
                 startActivity(intent);
                 break;
         }

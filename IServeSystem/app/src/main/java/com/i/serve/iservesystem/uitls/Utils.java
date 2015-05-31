@@ -5,10 +5,13 @@ import android.view.ViewGroup;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by Admin on 5/29/2015.
  */
 public class Utils {
+    private static final DecimalFormat df = new DecimalFormat("###,###");
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();
@@ -28,6 +31,10 @@ public class Utils {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
         listView.setLayoutParams(params);
         listView.requestLayout();
+    }
+
+    public static String formatPrice(double price){
+        return df.format(price);
     }
 
 }

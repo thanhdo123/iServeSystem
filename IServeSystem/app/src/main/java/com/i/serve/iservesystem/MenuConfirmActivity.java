@@ -25,11 +25,16 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
     Button btnConfirmMenuXacNhan;
     List<com.i.serve.iservesystem.dto.MenuItem> chosenMnuItems;
     ConfirmMenuListViewAdapter confirmMenuListViewAdapter;
+    private int tableSelected = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_confirm);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            tableSelected = extras.getInt("tableId");
+        }
 
         btnConfirmMenuXacNhan = (Button)findViewById(R.id.btnConfirmMenuXacNhan);
         lsvConfirmMnuList = (ListView)findViewById(R.id.lsvConfirmMnuList);
@@ -77,6 +82,7 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
         switch (view.getId()) {
             case R.id.btnConfirmMenuXacNhan:
                 Intent intent = new Intent(this, TableDetailActivity.class);
+                intent.putExtra("tableId", tableSelected);
                 startActivity(intent);
                 break;
         }

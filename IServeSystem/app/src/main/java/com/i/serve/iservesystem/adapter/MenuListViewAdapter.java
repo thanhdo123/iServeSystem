@@ -1,19 +1,24 @@
 package com.i.serve.iservesystem.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.i.serve.iservesystem.R;
 import com.i.serve.iservesystem.dto.MenuItem;
+import com.i.serve.iservesystem.uitls.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +38,6 @@ public class MenuListViewAdapter extends ArrayAdapter<MenuItem> {
 	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-
 		View view = convertView;
 		if (view == null)
 			view = new ItemMenuListView(context);
@@ -42,14 +46,11 @@ public class MenuListViewAdapter extends ArrayAdapter<MenuItem> {
 		if (c != null) {
 			TextView tvMnuName = ((ItemMenuListView) view).tvMnuName;
 			ImageView ivMnuImage = ((ItemMenuListView) view).ivMnuImage;
-
             TextView tvMnuDesc = ((ItemMenuListView) view).tvMnuDesc;
             TextView tvMnuPrice = ((ItemMenuListView) view).tvMnuPrice;
-
-			EditText etMnuItemQuantity = ((ItemMenuListView) view).etMnuItemQuantity;
-
+			TextView etMnuItemQuantity = ((ItemMenuListView) view).etMnuItemQuantity;
 			tvMnuName.setText(c.getName());
-
+			tvMnuName.setTextColor(Color.BLUE);
 			switch (c.getId()){
 				case 1:
 					ivMnuImage.setImageResource(R.drawable.img1);
@@ -70,26 +71,20 @@ public class MenuListViewAdapter extends ArrayAdapter<MenuItem> {
 					ivMnuImage.setImageResource(R.drawable.img6);
 					break;
 			}
-
 			tvMnuDesc.setText(c.getDescription());
-			tvMnuPrice.setText(String.format("%,.0f", c.getPrice()));
-
-			etMnuItemQuantity.setText("0");
-
+			tvMnuPrice.setText(Utils.formatPrice(c.getPrice()));
+			etMnuItemQuantity.setText("");
 		}
-
 		return view;
 	}
-	
 
+	public class ItemMenuListView extends LinearLayout {
 
-	private class ItemMenuListView extends LinearLayout {
-
-		TextView tvMnuName;
+		public TextView tvMnuName;
 		ImageView ivMnuImage;
         TextView tvMnuDesc;
         TextView tvMnuPrice;
-        EditText etMnuItemQuantity;
+		public TextView etMnuItemQuantity;
 		public ItemMenuListView(Context context) {
 			super(context);
 			LayoutInflater listItem = (LayoutInflater) this.getContext()
@@ -100,7 +95,7 @@ public class MenuListViewAdapter extends ArrayAdapter<MenuItem> {
 
             this.tvMnuDesc = (TextView) findViewById(R.id.tvMnuDesc);
             this.tvMnuPrice = (TextView) findViewById(R.id.tvMnuPrice);
-            this.etMnuItemQuantity = (EditText) findViewById(R.id.etMnuItemQuantity);
+            this.etMnuItemQuantity = (TextView) findViewById(R.id.etMnuItemQuantity);
 		}
 	}
 }
