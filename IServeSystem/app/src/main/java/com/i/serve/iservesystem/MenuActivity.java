@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
 import com.i.serve.iservesystem.service.MenuService;
@@ -28,6 +29,7 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     List<com.i.serve.iservesystem.dto.MenuItem> mnuItems;
     MenuListViewAdapter menuListViewAdapter;
     private int tableSelected = -1;
+    TextView tvMnuTotalCost;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +42,12 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         btnMenuGoiMon = (Button)findViewById(R.id.btnMenuGoiMon);
         lsvMnuList = (ListView)findViewById(R.id.lsvMnuList);
 
+        tvMnuTotalCost = (TextView)findViewById(R.id.tvMnuTotalCost);
+
         lsvMnuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> av, View view, int i, long l) {
-                performSelect(view);
+                //Toast.makeText(getApplicationContext(), "setOnItemClickListener:     " + i, Toast.LENGTH_LONG).show();
+                performSelect(view, i);
             }
         });
 
@@ -53,7 +58,9 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     protected void onResume() {
         super.onResume();
         mnuItems = MenuService.getMenuItems();
-
+        for (com.i.serve.iservesystem.dto.MenuItem item: mnuItems){
+            item.setQuantity(0);
+        }
         Log.d("mnuItems.size(): ", mnuItems.size() + "");
 
         //Toast.makeText(this,  customers.size() + "", Toast.LENGTH_SHORT).show();
@@ -61,6 +68,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         menuListViewAdapter.setNotifyOnChange(true);
         lsvMnuList.setAdapter(menuListViewAdapter);
         Utils.setListViewHeightBasedOnChildren(lsvMnuList);
+
+        updateTotalCost();
     }
 
     @Override
@@ -88,14 +97,18 @@ public class MenuActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnMenuGoiMon:
-                Intent intent = new Intent(this, MenuConfirmActivity.class);
-                intent.putExtra("tableId", tableSelected);
-                startActivity(intent);
+                if (!hasAnyItem()){
+                    Toast.makeText(getApplicationContext(), getString(R.string.menu_goi_mon_tiep_tuc), Toast.LENGTH_LONG).show();
+                }else {
+                    Intent intent = new Intent(this, MenuConfirmActivity.class);
+                    intent.putExtra("tableId", tableSelected);
+                    startActivity(intent);
+                }
                 break;
         }
     }
 
-    public void performSelect(View view){
+    public void performSelect(View view, int position){
         final MenuListViewAdapter.ItemMenuListView itemMenuListView = (MenuListViewAdapter.ItemMenuListView) view;
         final Dialog d = new Dialog(MenuActivity.this);
         d.setTitle(getResources().getString(R.string.title_sl));
@@ -106,6 +119,8 @@ public class MenuActivity extends Activity implements View.OnClickListener {
         np.setMaxValue(50);
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
+        final int pos = position;
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,8 +128,15 @@ public class MenuActivity extends Activity implements View.OnClickListener {
                     itemMenuListView.etMnuItemQuantity.setText(String.valueOf(np.getValue()));
                     itemMenuListView.etMnuItemQuantity.setTextColor(Color.RED);
                     itemMenuListView.tvMnuName.setTextColor(Color.RED);
+
+
                 }
+                com.i.serve.iservesystem.dto.MenuItem item = mnuItems.get(pos);
+                item.setQuantity(np.getValue());
+                updateTotalCost();
+
                 d.dismiss();
+                //Toast.makeText(getApplicationContext(), "setOnItemClickListener:     " + pos, Toast.LENGTH_LONG).show();
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {
@@ -124,5 +146,25 @@ public class MenuActivity extends Activity implements View.OnClickListener {
             }
         });
         d.show();
+    }
+
+    private void updateTotalCost() {
+        double totalCost = 0;
+        for (com.i.serve.iservesystem.dto.MenuItem item: MenuService.getMenuItems()){
+            if (item.getQuantity() > 0) {
+                totalCost += item.getQuantity() * item.getPrice();
+            }
+        }
+        //display total cost
+        tvMnuTotalCost.setText(String.format("%,.0f", totalCost));
+    }
+
+    private boolean hasAnyItem() {
+        for (com.i.serve.iservesystem.dto.MenuItem item: MenuService.getMenuItems()){
+            if (item.getQuantity() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -32,7 +32,8 @@
                 android:layout_weight="7"
                 android:layout_height="wrap_content" />
 
-            <TextView android:text="6"
+            <TextView android:text=""
+                android:id="@+id/tvMnuConfirmBan"
                 android:layout_width="0dp"
                 android:gravity="right"
                 android:layout_weight="3"
@@ -79,12 +80,12 @@
                 android:gravity="left"
                 android:text="@string/menu_confirm_tongiatien" />
             <TextView
-                android:id="@+id/tvMnuPrice"
+                android:id="@+id/tvMnuTotalCost"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4"
                 android:gravity="center"
-                android:text="1.325.000" />
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout

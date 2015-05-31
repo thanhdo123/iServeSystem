@@ -10,12 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.i.serve.iservesystem.adapter.ConfirmMenuListViewAdapter;
 import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
 import com.i.serve.iservesystem.service.MenuService;
 import com.i.serve.iservesystem.uitls.Utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,7 +28,8 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
     List<com.i.serve.iservesystem.dto.MenuItem> chosenMnuItems;
     ConfirmMenuListViewAdapter confirmMenuListViewAdapter;
     private int tableSelected = -1;
-
+    TextView tvMnuTotalCost;
+    TextView tvMnuConfirmBan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +41,24 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
 
         btnConfirmMenuXacNhan = (Button)findViewById(R.id.btnConfirmMenuXacNhan);
         lsvConfirmMnuList = (ListView)findViewById(R.id.lsvConfirmMnuList);
-
+        tvMnuTotalCost = (TextView)findViewById(R.id.tvMnuTotalCost);
+        tvMnuConfirmBan = (TextView)findViewById(R.id.tvMnuConfirmBan);
         btnConfirmMenuXacNhan.setOnClickListener(this);
+
+        tvMnuConfirmBan.setText(String.valueOf(tableSelected));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        chosenMnuItems = MenuService.getChosenMenuItems();
+        chosenMnuItems = new ArrayList<>();
+
+        for (com.i.serve.iservesystem.dto.MenuItem item: MenuService.getMenuItems()){
+            if (item.getQuantity() > 0) {
+                chosenMnuItems.add(item);
+            }
+        }
+
 
         Log.d("chosenMnuItems.size(): ", chosenMnuItems.size() + "");
 
@@ -54,6 +67,9 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
         confirmMenuListViewAdapter.setNotifyOnChange(true);
         lsvConfirmMnuList.setAdapter(confirmMenuListViewAdapter);
         Utils.setListViewHeightBasedOnChildren(lsvConfirmMnuList);
+        updateTotalCost();
+
+
     }
 
     @Override
@@ -86,5 +102,17 @@ public class MenuConfirmActivity extends Activity implements View.OnClickListene
                 startActivity(intent);
                 break;
         }
+    }
+
+    private void updateTotalCost() {
+        double totalCost = 0;
+        for (com.i.serve.iservesystem.dto.MenuItem item: MenuService.getMenuItems()){
+            if (item.getQuantity() > 0) {
+                totalCost += item.getQuantity() * item.getPrice();
+            }
+        }
+
+        //display total cost
+        tvMnuTotalCost.setText(String.format("%,.0f", totalCost));
     }
 }

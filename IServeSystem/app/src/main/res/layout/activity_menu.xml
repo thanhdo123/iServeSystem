@@ -39,12 +39,12 @@
             android:gravity="left"
             android:text="@string/menu_tong_gia_tien" />
         <TextView
-            android:id="@+id/tvMnuPrice"
+            android:id="@+id/tvMnuTotalCost"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
             android:gravity="center"
-            android:text="1.325.000" />
+            android:text="0" />
     </LinearLayout>
 
     <LinearLayout

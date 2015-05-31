@@ -30,6 +30,7 @@
     <string name="menu_thucdon_header">Thực đơn</string>
     <string name="menu_tong_gia_tien">Tổng giá tiền</string>
     <string name="menu_goi_mon">Gọi món</string>
+    <string name="menu_goi_mon_tiep_tuc">Chưa có món nào được chọn</string>
     <string name="title_activity_menu_confirm">MenuConfirmActivity</string>
     <string name="title_activity_table_detail">iServe</string>
 

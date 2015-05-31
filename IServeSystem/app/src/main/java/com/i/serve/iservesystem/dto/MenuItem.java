@@ -15,7 +15,7 @@ public class MenuItem {
         this.name = name;
         this.setDescription(description);
         this.price = price;
-        setQuantity(1);
+        setQuantity(0);
     }
 
     public int getId() {

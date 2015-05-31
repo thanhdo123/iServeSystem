@@ -45,7 +45,7 @@ public class ConfirmMenuListViewAdapter extends ArrayAdapter<MenuItem> {
 
 			tvConfirmMnuName.setText(c.getName());
 			tvConfirmMnuPrice.setText(String.format("%,.0f", c.getPrice()));
-			etConfirmMnuItemQuantity.setText("1");
+			etConfirmMnuItemQuantity.setText("" + c.getQuantity());
 		}
 
 		return view;
