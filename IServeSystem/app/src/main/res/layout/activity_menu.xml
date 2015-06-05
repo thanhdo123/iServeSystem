@@ -1,64 +1,92 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
-    tools:context="com.i.serve.iservesystem.MenuActivity">
-
-    <TextView android:text="@string/menu_thucdon_header"
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal" >
-        <ListView
-            android:id="@+id/lsvMnuList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
-    </LinearLayout>
-    <LinearLayout
+    android:layout_height="match_parent" >
+    <!-- Header aligned to top -->
+    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+        android:layout_alignParentTop="true"
+        android:background="#00BFFF"
+        android:gravity="center" >
         <TextView
-            android:id="@+id/tvTongGiaTien"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="6"
-            android:gravity="left"
-            android:text="@string/menu_tong_gia_tien" />
-        <TextView
-            android:id="@+id/tvMnuTotalCost"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="0" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
-        <Button
-            style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/menu_goi_mon"
-            android:gravity="right"
-            android:id="@+id/btnMenuGoiMon"
-            android:layout_alignParentBottom="true"/>
-    </LinearLayout>
-</LinearLayout>
-</ScrollView>
+            android:layout_margin="5dp"
+            android:text="@string/menu_thucdon_header"
+            android:gravity="center"
+            android:layout_weight="0.5"
+            android:textSize="20sp" />
+    </RelativeLayout>
+    <!-- Footer aligned to bottom -->
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#00BFFF"
+        android:gravity="center" >
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <TextView
+                android:id="@+id/tvTongGiaTien"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:gravity="left"
+                android:textSize="20sp"
+                android:text="@string/menu_tong_gia_tien" />
+            <TextView
+                android:id="@+id/tvMnuTotalCost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="0" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/menu_goi_mon"
+                android:gravity="right"
+                android:id="@+id/btnMenuGoiMon"
+                android:layout_alignParentBottom="true"/>
+        </LinearLayout>
+    </RelativeLayout>
+    <!-- Content below header and above footer -->
+    <RelativeLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footer"
+        android:layout_below="@id/header"
+        android:gravity="center" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal" >
+            <ListView
+                android:id="@+id/lsvMnuList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </ListView>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
+
+
+
+
