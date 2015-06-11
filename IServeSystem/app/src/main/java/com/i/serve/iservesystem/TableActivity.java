@@ -47,6 +47,10 @@ public class TableActivity extends Activity {
                 public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), TableDetailActivity.class);
                 intent.putExtra("tableId", table.getTableId());
+
+                    //clear menu for one table
+
+
                 startActivity(intent);
                 }
             });

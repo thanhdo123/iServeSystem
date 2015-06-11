@@ -9,11 +9,16 @@ public class TableDetailItem {
     private String foodName;
     private int quantity;
     private double price;
-    /*
-     * 1: mon da phuc vu
-     * 2: non dang cho
-     * need add more here
-     */
+
+    public final static int ORDER_STATE_CREATED = 1;
+    public final static int ORDER_STATE_PROGRESS = 2;
+    public final static int ORDER_STATE_DONE = 3;
+    public final static int ORDER_STATE_DELIVERED = 4;
+    public final static int ORDER_STATE_REMOVE = 100;
+    public final static int ORDER_STATE_OUTOFSTOCK = 101;
+    public final static int ORDER_STATE_WAIT_INFO = 200;
+    public final static int ORDER_STATE_CONFIRM = 201;
+
     private int status;
 
     public TableDetailItem(int foodId, String foodName, int quantity, double price, int status) {

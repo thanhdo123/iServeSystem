@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -39,6 +40,9 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
     private TextView lblDangcho;
     private int tableSelected = -1;
 
+    private List<TableDetailItem> orders = new ArrayList<>();
+    private List<TableDetailItem> waitings = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,24 +51,15 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         if (extras != null) {
             tableSelected = extras.getInt("tableId");
         }
-        List<TableDetailItem> orders = new ArrayList<>();
-        List<TableDetailItem> waitings = new ArrayList<>();
-        //get order details by table id
-        List<TableDetailItem> foods= TableDetailService.getTableDetailById(tableSelected);
-        for (TableDetailItem item : foods){
-            if(item.getStatus() == 1){
-                orders.add(item);
-            }else if(item.getStatus() == 2){
-                waitings.add(item);
-            }
 
-        }
+
+        lsvOrderList = (ListView)findViewById(R.id.lsvOrderList);
+        lsvWaitingList = (ListView)findViewById(R.id.lsvWaitingList);
 
         TextView lblHeader = (TextView) this.findViewById(R.id.lblHeader);
         lblHeader.setText(getResources().getString(R.string.table) + " " + tableSelected);
 
-        lsvOrderList = (ListView)findViewById(R.id.lsvOrderList);
-        lsvWaitingList = (ListView)findViewById(R.id.lsvWaitingList);
+        refreshData();
 
         ordersAdapter = new OrderListViewAdapter(this, orders);
         ordersAdapter.setNotifyOnChange(true);
@@ -88,6 +83,58 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         lblPhucvu.setText(getResources().getString(R.string.title_phucvu) + " (" + orders.size() + ")");
         lblDangcho.setText(getResources().getString(R.string.title_dangcho) + " (" + waitings.size() + ")");
 
+        lsvWaitingList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> av, View view, int i, long l) {
+                //Toast.makeText(getApplicationContext(), "setOnItemClickListener:     " + i, Toast.LENGTH_LONG).show();
+                performOrderItemSelect(view, i);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        refreshData();
+    }
+
+    private void refreshData(){
+
+        orders.clear();
+        waitings.clear();
+
+        //get order details by table id
+        List<TableDetailItem> foods= TableDetailService.getTableDetailById(tableSelected);
+        for (TableDetailItem item : foods){
+            if(item.getStatus() == TableDetailItem.ORDER_STATE_DELIVERED){
+                orders.add(item);
+            }else if(item.getStatus() == TableDetailItem.ORDER_STATE_DONE ||
+                    item.getStatus() == TableDetailItem.ORDER_STATE_PROGRESS ||
+                    item.getStatus() == TableDetailItem.ORDER_STATE_CREATED){
+                waitings.add(item);
+            }
+        }
+
+        ordersAdapter = new OrderListViewAdapter(this, orders);
+        ordersAdapter.setNotifyOnChange(true);
+        lsvOrderList.setAdapter(ordersAdapter);
+        Utils.setListViewHeightBasedOnChildren(lsvOrderList);
+
+        waitingsAdapter = new OrderListViewAdapter(this, waitings);
+        waitingsAdapter.setNotifyOnChange(true);
+        lsvWaitingList.setAdapter(waitingsAdapter);
+        Utils.setListViewHeightBasedOnChildren(lsvWaitingList);
+    }
+    public void performOrderItemSelect(View view, int position){
+        final OrderListViewAdapter.ItemOrderListView itemMenuListView = (OrderListViewAdapter.ItemOrderListView) view;
+        com.i.serve.iservesystem.dto.TableDetailItem item = waitings.get(position);
+        if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED){
+            item.setStatus(TableDetailItem.ORDER_STATE_REMOVE);
+        }else if (item.getStatus() == TableDetailItem.ORDER_STATE_DONE){
+            item.setStatus(TableDetailItem.ORDER_STATE_DELIVERED);
+        }
+
+        refreshData();
     }
 
     @Override

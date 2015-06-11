@@ -1,6 +1,7 @@
 package com.i.serve.iservesystem.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,11 +51,28 @@ public class OrderListViewAdapter extends ArrayAdapter<TableDetailItem> {
             txtFoodPrice.setText(Utils.formatPrice(c.getPrice()));
             txtQuantity.setText(String.valueOf(c.getQuantity()));
 
+            if (c.getStatus() == TableDetailItem.ORDER_STATE_CREATED){
+                txtFoodName.setTextColor(Color.BLACK);
+                txtFoodPrice.setTextColor(Color.BLACK);
+                txtQuantity.setTextColor(Color.BLACK);
+                txtQuantity.setText("X");
+                txtQuantity.setBackgroundColor(Color.RED);
+            }else if (c.getStatus() == TableDetailItem.ORDER_STATE_PROGRESS){
+                txtFoodName.setTextColor(Color.parseColor("#FFFFBB33"));
+                txtFoodPrice.setTextColor(Color.parseColor("#FFFFBB33"));
+                txtQuantity.setTextColor(Color.parseColor("#FFFFBB33"));
+                txtQuantity.setBackgroundColor(Color.parseColor("#FFFFBB33"));
+            }else if (c.getStatus() == TableDetailItem.ORDER_STATE_DONE){
+                txtFoodName.setTextColor(Color.BLUE);
+                txtFoodPrice.setTextColor(Color.BLUE);
+                txtQuantity.setTextColor(Color.BLACK);
+                txtQuantity.setBackgroundColor(Color.BLUE);
+            }
         }
         return view;
     }
 
-    private class ItemOrderListView extends LinearLayout {
+    public class ItemOrderListView extends LinearLayout {
 
         TextView txtFoodName;
         TextView txtFoodPrice;
