@@ -24,4 +24,9 @@ public class TableDetailService {
         }
         return list;
     }
+
+    public static boolean changeTableStatus(TableDetailItem iableDetailItem){
+        //add code to send to server
+        return true;
+    }
 }

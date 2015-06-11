@@ -128,13 +128,14 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
     public void performOrderItemSelect(View view, int position){
         final OrderListViewAdapter.ItemOrderListView itemMenuListView = (OrderListViewAdapter.ItemOrderListView) view;
         com.i.serve.iservesystem.dto.TableDetailItem item = waitings.get(position);
-        if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED){
-            item.setStatus(TableDetailItem.ORDER_STATE_REMOVE);
-        }else if (item.getStatus() == TableDetailItem.ORDER_STATE_DONE){
-            item.setStatus(TableDetailItem.ORDER_STATE_DELIVERED);
+        if(TableDetailService.changeTableStatus(item)) {
+            if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED) {
+                item.setStatus(TableDetailItem.ORDER_STATE_REMOVE);
+            } else if (item.getStatus() == TableDetailItem.ORDER_STATE_DONE) {
+                item.setStatus(TableDetailItem.ORDER_STATE_DELIVERED);
+            }
+            refreshData();
         }
-
-        refreshData();
     }
 
     @Override

@@ -9,10 +9,12 @@ public class TableItem {
 
     private int tableId;
     private int status;
+    private int color;
 
-    public TableItem(int tableId, int status) {
+    public TableItem(int tableId, int status, int color) {
         this.tableId = tableId;
         this.status = status;
+        this.color = color;
     }
 
     public int getTableId() {
@@ -31,19 +33,10 @@ public class TableItem {
         this.status = status;
     }
 
-    public int getColor(){
-        switch (this.status){
-            case 1:
-                return Color.BLUE;
-            case 2:
-                return Color.GREEN;
-            case 3:
-                return Color.YELLOW;
-            case 4:
-                return Color.MAGENTA;
-            default:
-                return Color.BLACK;
-        }
+    public int getColor() {return color;}
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
 }
