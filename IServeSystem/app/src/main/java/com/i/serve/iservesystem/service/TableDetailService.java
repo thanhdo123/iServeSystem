@@ -29,4 +29,8 @@ public class TableDetailService {
         //add code to send to server
         return true;
     }
+
+    public static void saveTable(int tableId){
+        //action when press save
+    }
 }

@@ -48,6 +48,7 @@
     <string name="title_sl">Số lượng</string>
     <string name="btn_chon">Chọn</string>
     <string name="btn_huy">Hủy</string>
+    <string name="btn_luu">Lưu</string>
 
     <string name="menu_confirm_goimon">Gọi món</string>
     <string name="menu_confirm_ban">Bàn</string>

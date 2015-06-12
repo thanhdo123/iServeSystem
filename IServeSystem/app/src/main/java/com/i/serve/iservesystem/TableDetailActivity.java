@@ -40,6 +40,9 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
     private TextView lblDangcho;
     private int tableSelected = -1;
 
+    private Button btnSave;
+    private Button btnCancel;
+
     private List<TableDetailItem> orders = new ArrayList<>();
     private List<TableDetailItem> waitings = new ArrayList<>();
 
@@ -73,6 +76,12 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
 
         btnOrder = (Button) findViewById(R.id.btnOrder);
         btnOrder.setOnClickListener(this);
+
+        btnSave = (Button) findViewById(R.id.btnSave);
+        btnSave.setOnClickListener(this);
+
+        btnCancel = (Button) findViewById(R.id.btnCancel);
+        btnCancel.setOnClickListener(this);
 
         txtSoKhach = (TextView)findViewById(R.id.txtSoKhach);
 
@@ -194,6 +203,13 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
             case R.id.btnOrder:
                 intent = new Intent(this, MenuActivity.class);
                 intent.putExtra("tableId", tableSelected);
+                startActivity(intent);
+                break;
+            case R.id.btnSave:
+                TableDetailService.saveTable(tableSelected);
+                break;
+            case R.id.btnCancel:
+                intent = new Intent(this, TableActivity.class);
                 startActivity(intent);
                 break;
         }
