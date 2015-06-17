@@ -55,4 +55,9 @@
     <string name="menu_confirm_xacnhan">Xác nhận</string>
     <string name="menu_confirm_xacnhangoidmon">Xác nhận gọi món</string>
     <string name="menu_confirm_tongiatien">Tổng giá tiền</string>
+
+    <string name="table_confirm_xacnhanthaydoi">"Xác nhận thay đổi?</string>
+    <string name="table_confirm_dung">Đúng</string>
+    <string name="table_confirm_sai">Sai</string>
+
 </resources>

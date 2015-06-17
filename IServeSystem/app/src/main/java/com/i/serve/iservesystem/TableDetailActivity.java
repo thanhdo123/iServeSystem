@@ -1,7 +1,9 @@
 package com.i.serve.iservesystem;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -16,6 +18,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.i.serve.iservesystem.adapter.MenuListViewAdapter;
 import com.i.serve.iservesystem.adapter.OrderListViewAdapter;
@@ -135,15 +138,41 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         Utils.setListViewHeightBasedOnChildren(lsvWaitingList);
     }
     public void performOrderItemSelect(View view, int position){
+
         final OrderListViewAdapter.ItemOrderListView itemMenuListView = (OrderListViewAdapter.ItemOrderListView) view;
-        com.i.serve.iservesystem.dto.TableDetailItem item = waitings.get(position);
-        if(TableDetailService.changeTableStatus(item)) {
-            if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED) {
-                item.setStatus(TableDetailItem.ORDER_STATE_REMOVE);
-            } else if (item.getStatus() == TableDetailItem.ORDER_STATE_DONE) {
-                item.setStatus(TableDetailItem.ORDER_STATE_DELIVERED);
-            }
-            refreshData();
+        final com.i.serve.iservesystem.dto.TableDetailItem item = waitings.get(position);
+
+        if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED ||
+                item.getStatus() == TableDetailItem.ORDER_STATE_DONE) {
+
+            DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case DialogInterface.BUTTON_POSITIVE: // Yes button clicked
+                            //Toast.makeText(TableDetailActivity.this, "Yes Clicked", Toast.LENGTH_LONG).show();
+                            if(TableDetailService.changeTableStatus(item)) {
+                                if (item.getStatus() == TableDetailItem.ORDER_STATE_CREATED) {
+                                    item.setStatus(TableDetailItem.ORDER_STATE_REMOVE);
+                                } else if (item.getStatus() == TableDetailItem.ORDER_STATE_DONE) {
+                                    item.setStatus(TableDetailItem.ORDER_STATE_DELIVERED);
+                                }
+                                refreshData();
+                            }
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE: // No button clicked
+                            // do nothing
+                            break;
+                    }
+                }
+            };
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+            builder.setMessage(getResources().getString(R.string.table_confirm_xacnhanthaydoi)).
+                    setPositiveButton(getResources().getString(R.string.table_confirm_dung),
+                            dialogClickListener).
+                    setNegativeButton(getResources().
+                            getString(R.string.table_confirm_sai), dialogClickListener).show();
+
         }
     }
 
