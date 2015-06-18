@@ -13,6 +13,7 @@ import java.io.IOException;
 public class IServeApplication extends Application {
     private IConnectionManager iConnectionManager = null;
     private boolean isLoad = false;
+    private boolean isLogin = false;
 
     public void setupConnection(String host, int port, int timeOut){
         if(!isLoad) {
@@ -28,5 +29,13 @@ public class IServeApplication extends Application {
 
     public String writeAndWaitReply( String message ){
         return iConnectionManager.writeAndWaitReply(message);
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(boolean isLogin) {
+        this.isLogin = isLogin;
     }
 }

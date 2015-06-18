@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TableDetailActivity extends Activity implements View.OnClickListener {
+public class TableDetailActivity extends AbstractActivity implements View.OnClickListener {
 
     private ListView lsvOrderList;
     private ListView lsvWaitingList;
@@ -176,13 +176,6 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_table_detail, menu);
-        return true;
-    }
-
     public void performSelect(View view){
         final Dialog d = new Dialog(TableDetailActivity.this);
         d.setTitle(getResources().getString(R.string.title_sokhach));
@@ -211,20 +204,6 @@ public class TableDetailActivity extends Activity implements View.OnClickListene
         d.show();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
     @Override
     public void onClick(View v) {
         Intent intent;

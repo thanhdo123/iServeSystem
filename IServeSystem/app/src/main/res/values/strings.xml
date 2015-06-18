@@ -59,5 +59,10 @@
     <string name="table_confirm_xacnhanthaydoi">"Xác nhận thay đổi?</string>
     <string name="table_confirm_dung">Đúng</string>
     <string name="table_confirm_sai">Sai</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_abstract">AbstractActivity</string>
+
+    <string name="logout">Đăng xuất</string>
+    <string name="setting">Cài đặt</string>
 
 </resources>
