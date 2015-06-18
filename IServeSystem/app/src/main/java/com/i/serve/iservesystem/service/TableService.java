@@ -20,6 +20,12 @@ public class TableService {
         list.add(new TableItem(4, 4, Color.YELLOW));
         list.add(new TableItem(5, 1, Color.DKGRAY));
         list.add(new TableItem(6, 2, Color.BLUE));
+        list.add(new TableItem(7, 1, Color.BLUE));
+        list.add(new TableItem(8, 2, Color.RED));
+        list.add(new TableItem(9, 3, Color.GREEN));
+        list.add(new TableItem(10, 4, Color.YELLOW));
+        list.add(new TableItem(11, 1, Color.DKGRAY));
+        list.add(new TableItem(12, 2, Color.BLUE));
         return list;
     }
 }
