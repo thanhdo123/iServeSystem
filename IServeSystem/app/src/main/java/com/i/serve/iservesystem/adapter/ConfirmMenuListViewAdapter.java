@@ -41,7 +41,7 @@ public class ConfirmMenuListViewAdapter extends ArrayAdapter<MenuItem> {
 		if (c != null) {
 			TextView tvConfirmMnuName = ((ChosenItemMenuListView) view).tvConfirmMnuName;
             TextView tvConfirmMnuPrice = ((ChosenItemMenuListView) view).tvConfirmMnuPrice;
-			EditText etConfirmMnuItemQuantity = ((ChosenItemMenuListView) view).etConfirmMnuItemQuantity;
+			TextView etConfirmMnuItemQuantity = ((ChosenItemMenuListView) view).etConfirmMnuItemQuantity;
 
 			tvConfirmMnuName.setText(c.getName());
 			tvConfirmMnuPrice.setText(String.format("%,.0f", c.getPrice()));
@@ -56,7 +56,7 @@ public class ConfirmMenuListViewAdapter extends ArrayAdapter<MenuItem> {
 
 		TextView tvConfirmMnuName;
         TextView tvConfirmMnuPrice;
-        EditText etConfirmMnuItemQuantity;
+		TextView etConfirmMnuItemQuantity;
 		public ChosenItemMenuListView(Context context) {
 			super(context);
 			LayoutInflater listItem = (LayoutInflater) this.getContext()
@@ -64,7 +64,7 @@ public class ConfirmMenuListViewAdapter extends ArrayAdapter<MenuItem> {
 			listItem.inflate(R.layout.confirm_item_menu_listview, this, true);
 			this.tvConfirmMnuName =(TextView) findViewById(R.id.tvConfirmMnuName);
 			this.tvConfirmMnuPrice = (TextView) findViewById(R.id.tvConfirmMnuPrice);
-            this.etConfirmMnuItemQuantity = (EditText) findViewById(R.id.etConfirmMnuItemQuantity);
+            this.etConfirmMnuItemQuantity = (TextView) findViewById(R.id.etConfirmMnuItemQuantity);
 		}
 	}
 }
