@@ -103,6 +103,24 @@ public class TableDetailActivity extends AbstractActivity implements View.OnClic
         });
     }
 
+    /**
+     * onClick label cac mon da phuc vu handler
+     */
+    public void lblPhucvuClick(View v){
+        lsvOrderList.setVisibility( lsvOrderList.isShown()
+                ? View.GONE
+        : View.VISIBLE );
+    }
+
+    /**
+     * onClick label cac mon da phuc vu handler
+     */
+    public void lblDangchoClick(View v){
+        lsvWaitingList.setVisibility( lsvWaitingList.isShown()
+                ? View.GONE
+                : View.VISIBLE );
+    }
+
     @Override
     protected void onResume() {
         super.onResume();

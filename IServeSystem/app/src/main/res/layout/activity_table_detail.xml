@@ -93,7 +93,8 @@
                 android:text="@string/title_phucvu"
                 android:gravity="center"
                 android:layout_weight="0.5"
-                android:id="@+id/lblPhucvu" />
+                android:id="@+id/lblPhucvu"
+                android:onClick="lblPhucvuClick"/>
 
         </LinearLayout>
 
@@ -119,7 +120,8 @@
                 android:text="@string/title_dangcho"
                 android:gravity="center"
                 android:layout_weight="0.5"
-                android:id="@+id/lblDangcho" />
+                android:id="@+id/lblDangcho"
+                android:onClick="lblDangchoClick"/>
         </LinearLayout>
 
         <ListView
